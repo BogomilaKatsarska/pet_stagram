@@ -1,3 +1,5 @@
+# 1:19
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -6,7 +8,10 @@ SECRET_KEY = 'django-insecure-9k5+^4%mohwql*f=jdxhg#f#b=48q1mjv__vp2&6ti4pqd!%*v
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,8 +64,11 @@ WSGI_APPLICATION = 'pet_stagram.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'petstagram_db_new',
+        'USER': 'postgres',
+        'PASSWORD': 'Bogi1995',
+        'PORT': '5432',
     }
 }
 
@@ -100,8 +108,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATICFILES_DIRS = (
+    BASE_DIR / 'staticfiles',
+)
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+
+# FOR DEPLOYMENT:
+# STATIC_ROOT = '/tmp/petstagram/static-files'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
