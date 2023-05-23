@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from pet_stagram.pets.models import Pet
+from pet_stagram.photos.validators import validate_image_less_than_5MB
 
 
 class Photo(models.Model):
@@ -11,6 +12,7 @@ class Photo(models.Model):
     MAX_LEN_DESCRIPTION = 300
     photo = models.ImageField(
         # upload_to='mediafiles/pet_photos/',
+        validators=(validate_image_less_than_5MB,),
         null=False,
         blank=True,
     )
