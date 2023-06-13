@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
+import pyperclip
+from django.urls import reverse
 
 from pet_stagram.common.models import PhotoLike
 from pet_stagram.photos.models import Photo
@@ -43,3 +45,14 @@ def like_photo(request, photo_id):
     #     photo_id=photo_id,
     # )
     return redirect(request.META['HTTP_REFER'] + f'#photo-{photo_id}')
+
+# pip install pyperclip
+
+
+def share_photo(request, photo_id):
+    photo_details_url = reverse('details photo', kwargs={
+        'pk': photo_id})
+    pyperclip.copy(photo_details_url)
+    return redirect(request.META['HTTP_REFER'] + f'#photo-{photo_id}')
+
+
