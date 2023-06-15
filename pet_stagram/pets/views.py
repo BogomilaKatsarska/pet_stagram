@@ -1,12 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from pet_stagram.core.photo_utils import apply_likes_count
+from pet_stagram.pets.forms import PetCreateForm
 from pet_stagram.pets.utils import get_pet_by_name_and_username
 from pet_stagram.photos.models import Photo
 
 
 def add_pet(request):
-    return render(request, 'pets/pet-add-page.html')
+    if request.method == 'GET':
+        form = PetCreateForm()
+    else:
+        form = PetCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('details user', pk=1)
+        #TODO: fix this when auth
+
+    context = {
+        'form': PetCreateForm(),
+    }
+    return render(request, 'pets/pet-add-page.html', context)
 
 
 def delete_pet(request, username, pet_slug):
