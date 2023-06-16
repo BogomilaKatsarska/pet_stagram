@@ -11,7 +11,7 @@ class Photo(models.Model):
     MIN_LEN_DESCRIPTION = 10
     MAX_LEN_DESCRIPTION = 300
     photo = models.ImageField(
-        # upload_to='mediafiles/pet_photos/',
+        upload_to='pet_photos/',
         validators=(validate_image_less_than_5MB,),
         null=False,
         blank=True,

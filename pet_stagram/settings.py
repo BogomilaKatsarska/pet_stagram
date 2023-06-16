@@ -1,4 +1,5 @@
-0:30
+
+1:22
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,5 +119,9 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
