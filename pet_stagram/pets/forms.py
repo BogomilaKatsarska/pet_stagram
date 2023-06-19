@@ -53,6 +53,7 @@ class PetDeleteForm(PetBaseForm, DisabledFormMixin):
         # TODO: as dad 0:55:36 - Workshop III
         self._disable_fields()
 
+
     def save(self, commit=True):
         if commit:
             self.instance.delete()

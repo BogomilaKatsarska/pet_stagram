@@ -52,7 +52,7 @@
 
                 <!-- Start Pet Photo -->
                 <div class="imgBx" id="photo - {{ photo.pk }}">
-                    <img src="{% static 'images/axolotl.jpeg'%}" alt="post" class="cover">
+                    <img src="media/{{photo.photo}}" alt="post" class="cover">
                 </div>
                 <!-- End Pet Photo -->
 
@@ -64,6 +64,7 @@
                             <span class="heart">
 									<a href="{% url 'like photo' photo_id=photo.pk %}">
 										<!-- if user has liked the photo -->
+
                                         {% if photo.is_liked_by_user %}
                                         <svg style="color: red"
                                              xmlns="http://www.w3.org/2000/svg"
