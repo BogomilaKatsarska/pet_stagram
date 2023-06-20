@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% block page_content %}
     <!-- Starts Edit Photo Section -->
-    <div class="edit-delete edit-photo">
+    <div class="edit-delete delete-photo">
         <h2>Delete photo</h2>
 
         <!-- Starts Edit Photo Form -->
@@ -36,7 +36,7 @@
             {% csrf_token %}
 
             <!-- Edit Photo Button -->
-            <button class="edit-btn" type="submit">Delete Photo</button>
+            <button class="delete-btn" type="submit">Delete Photo</button>
         </form>
         <!-- End Edit Photo Form -->
 

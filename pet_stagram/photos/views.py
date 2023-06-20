@@ -60,3 +60,5 @@ def delete_photo(request, pk):
         'pk': pk,
     }
     return render(request, 'photos/photo-delete-page.html', context)
+
+

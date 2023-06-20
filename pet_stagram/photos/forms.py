@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from pet_stagram.common.models import PhotoLike, PhotoComment
 from pet_stagram.core.form_mixins import DisabledFormMixin
 from pet_stagram.photos.models import Photo
 
@@ -27,8 +28,16 @@ class PhotoDeleteForm(PhotoBaseForm, DisabledFormMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    # def save(self, commit=True):
+    #     if commit:
+    #         self.instance.delete()
+    #     return self.instance
+
     def save(self, commit=True):
         if commit:
+            self.instance.tagged_pets.clear() #many-to-many
+            PhotoLike.objects.filter(photo_id=self.instance.id).delete()
+            PhotoComment.objects.filter(photo_id=self.instance.id).delete()
             self.instance.delete()
         return self.instance
 
