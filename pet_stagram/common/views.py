@@ -19,7 +19,7 @@ def index(request):
     #     print('Errors:')
     #    print(search_form.errors)
 
-    photos = Photo.objects.all() 
+    photos = Photo.objects.all()
     if search_pattern:
         photos = photos.filter(tagged_pets__name__icontains=search_pattern)
     photos = [apply_likes_count(photo) for photo in photos]

@@ -1,7 +1,6 @@
 from django.urls import path
 
-from pet_stagram.common.views import index, like_photo, share_photo
-from pet_stagram.photos.views import comment_photo
+from pet_stagram.common.views import index, like_photo, share_photo, comment_photo
 
 urlpatterns = (
     path('', index, name='index'),
