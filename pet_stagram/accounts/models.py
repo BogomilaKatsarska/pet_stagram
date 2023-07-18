@@ -59,3 +59,4 @@ class AppUser(AbstractUser):
         choices=Gender.choices(),
         max_length=Gender.max_len(),
     )
+

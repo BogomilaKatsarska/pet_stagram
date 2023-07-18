@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, resolve_url
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 import pyperclip
 from django.urls import reverse
 
@@ -33,18 +34,15 @@ def index(request):
     return render(request, 'common/home-page.html', context)
 
 
-def get_user_liked_photos(photo_id):
-    #TODO: fix when auth available
-    return PhotoLike.objects.filter(photo_id=photo_id)
-
-
+@login_required
 def like_photo(request, photo_id):
-    user_liked_photos = get_user_liked_photos(photo_id)
+    user_liked_photos = PhotoLike.objects.filter(photo_id=photo_id, user_id=request.user.pk)
     if user_liked_photos:
         user_liked_photos.delete()
     else:
         photo_like = PhotoLike(
             photo_id=photo_id,
+            user_id=request.user.pk,
         )
         photo_like.save()
     # Option 2:
@@ -63,6 +61,7 @@ def share_photo(request, photo_id):
     return redirect(request.META['HTTP_REFER'] + f'#photo-{photo_id}')
 
 
+@login_required
 def comment_photo(request, photo_id):
     photo = Photo.objects.filter(pk=photo_id).get()
     form = PhotoCommentForm(request.POST)

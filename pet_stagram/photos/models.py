@@ -1,10 +1,12 @@
 # photos/models/py
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 from django.db import models
 
 from pet_stagram.pets.models import Pet
 from pet_stagram.photos.validators import validate_image_less_than_5MB
 
+UserModel = get_user_model()
 
 class Photo(models.Model):
     MAX_LEN_LOCATION = 30
@@ -38,4 +40,8 @@ class Photo(models.Model):
     tagged_pets = models.ManyToManyField(
         Pet,
         blank=True,
+    )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
     )

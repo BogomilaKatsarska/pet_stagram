@@ -1,8 +1,9 @@
 # pets/models.py
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
 
-
+UserModel = get_user_model()
 class Pet(models.Model):
     MAX_NAME = 30
     name = models.CharField(
@@ -22,6 +23,10 @@ class Pet(models.Model):
         unique=True,
         null=False,
         blank=True,
+    )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
     )
 
     def save(self, *args, **kwargs):

@@ -1,9 +1,12 @@
 # common/models.py
 # from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from pet_stagram.photos.models import Photo
 
+
+UserModel = get_user_model()
 
 class PhotoComment(models.Model):
     MAX_TEXT_LENGTH = 300
@@ -23,6 +26,10 @@ class PhotoComment(models.Model):
         null=False,
         blank=True,
     )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.RESTRICT,
+    )
 
 
 class PhotoLike(models.Model):
@@ -32,7 +39,7 @@ class PhotoLike(models.Model):
         null=False,
         blank=True,
     )
-    # When we have users
-    # user = models.ForeignKey(
-    #     User
-    # )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.RESTRICT,
+    )
