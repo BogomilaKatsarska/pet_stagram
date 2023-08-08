@@ -11,7 +11,6 @@ class UserCreateForm(UserCreationForm):
     class Meta:
         model = UserModel
         fields = ("username", "email")
-        #TODO:check what field_classes are
         field_classes = {'username': UsernameField}
 
 

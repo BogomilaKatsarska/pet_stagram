@@ -1,6 +1,3 @@
-
-# 2:51
-
 from pathlib import Path
 
 from django.urls import reverse_lazy
