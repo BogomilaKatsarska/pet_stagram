@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from pet_stagram.core.decorator import owner_required
 from pet_stagram.core.photo_utils import apply_likes_count
 from pet_stagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from pet_stagram.pets.models import Pet
@@ -57,6 +58,7 @@ def details_pet(request, username, pet_slug):
     return render(request, 'pets/pet-details-page.html', context)
 
 
+@owner_required
 def edit_pet(request, username, pet_slug):
     #TODO: use 'username' when auth
     pet = Pet.objects.filter(slug=pet_slug).get()
